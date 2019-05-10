@@ -33,21 +33,23 @@ function prrimeListArr($prime_counter = 0)
 
 function prepareTable($prime_arr = array())
 {
+    $spacing = floor(count($prime_arr) / 2);
     $prime_counter = count($prime_arr);
     echo "<br>\r\n";
-    echo str_pad(" ", 10);
-    for($row = 0; $row < $prime_counter; $row ++) {
+    echo str_pad(" ", $spacing);
+    for($row = 0; $row < $prime_counter + 1; $row ++) {
         for($col = 0; $col < $prime_counter; $col ++) {
             if($row == 0) {
                 $multiplier = 1;
+                if($col == 0) echo " | "; 
             } else if($col == 0) {
                 $multiplier = $prime_arr[$row - 1];
-                echo str_pad($multiplier, 10);
+                echo str_pad($multiplier, $spacing) . " | ";
             }
 
-            echo str_pad(($prime_arr[$col] * $multiplier), 10);
+            echo str_pad(($prime_arr[$col] * $multiplier), $spacing);
             if(($col + 1) == $prime_counter) { 
-                echo "<br>\r\n"; 
+                echo defined('STDIN') ? "\r\n" : "<br>"; 
             }
         }
     }
